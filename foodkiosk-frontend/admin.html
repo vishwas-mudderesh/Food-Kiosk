@@ -1,0 +1,52 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="kiosk.css">
+    <title>Document</title>
+</head>
+<body>
+<h2 class="ord">Total Orders: <span id="orderCount">0</span></h2>
+<div class="order-slip" id="orderSlip"></div>
+
+<script>
+  const API = "http://127.0.0.1:8000/api";
+
+  async function loadCount() {
+    const res = await fetch(`${API}/orders/count/`);
+    const data = await res.json();
+    document.getElementById('orderCount').textContent = data.total_orders;
+  }
+
+  async function loadRecent() {
+    const res = await fetch(`${API}/orders/list/`);
+    const { orders } = await res.json();
+    const box = document.getElementById('orderSlip');
+    box.innerHTML = orders.slice(0, 6).map(o => `
+      <section>
+        <h3>#${o.order_number}</h3>
+        <p><b>Total:</b> ₹${o.total_price}</p>
+        <p><b>Items:</b></p>
+        <ul>
+      ${o.items.map(i => `<li>${i.name} × ${i.quantity} = ₹${i.price * i.quantity}</li>`).join('')}
+        </ul>
+        <p><small>${new Date(o.created_at).toLocaleString()}</small></p>
+      </section>
+    `).join('');
+  }
+
+  loadCount();
+  loadRecent();
+  setInterval(loadOrders, 5000); // refresh every 5 seconds
+
+</script>
+
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiosk Ordering</title>
+    <link rel="stylesheet" href="kiosk.css">
+</head>
+<body>
+
+    <header>
+        <img src="c:\Users\Roopa\Downloads\burger_2933110.png" alt="">
+        <h1>FastBite Kiosk</h1>
+    </header>
+
+    <main>
+        <!-- Menu Section -->
+        <section id="menu">
+            <h2>Menu</h2>
+            <div class="menu-grid" id="menuGrid">
+                <!-- Items will be added by JS -->
+            </div>
+        </section>
+
+        <!-- Cart Section -->
+        <section id="cart">
+            <h2>🛒 Your Cart</h2>
+            <div id="cartItems"></div>
+            <div class="cartTotal"id="cartTotal">,<b>Total: ₹0</b></div>
+            <form action="next.html">
+            <button id="checkoutBtn">Checkout</button>
+            </form>
+        </section>
+    </main>
+    
+    <script src="kiosk.js"></script>
+</body>
+</html>

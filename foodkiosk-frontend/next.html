@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="kiosk.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="top">THANK YOU FOR YOUR ORDER</h1>
+    <h3 class="ord"></h3>
+    <form action="kiosk.html">
+        <button class="back">ORDER AGAIN</button>
+    </form>
+    <a href="admin.html">admin page</a>
+    <script>
+        const params = new URLSearchParams(location.search);
+    const order = params.get('order') || sessionStorage.getItem('order_number');
+
+    const ordEl = document.querySelector('.ord');
+    if (!order) {
+        ordEl.textContent = "No order found.";
+    } else {
+        // Optionally fetch full details; here we just show the number
+        ordEl.textContent = `Your Order Number: #${order}`;
+    }
+    </script>
+</body>
+</html>
